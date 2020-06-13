@@ -22,6 +22,28 @@
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
+            @if ($errors->any() || Session::has('success_message'))
+                <div class="alert alert-{{$errors->any() ? 'danger' : 'success'}}" style="display:none; margin-top: 10px;">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    @if($errors->any())
+                        <ul class="py-0 my-0">
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    @else
+                        {{Session::get('success_message')}}
+                    @endif
+                </div>
+                <script>
+                    $('.alert').slideDown();
+                    setTimeout(function () {
+                        $('.alert').slideUp();
+                    }, 10000)
+                </script>
+            @endif
             <div class="row">
                 <div class="col-12">
                     <div class="card">
@@ -35,16 +57,21 @@
                                 <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Name</th>
+                                    <th>Category</th>
+                                    <th>Parent Category</th>
+                                    <th>Section</th>
                                     <th>URL</th>
                                     <th>Status</th>
+                                    <th>Actions</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($categories as $category)
                                 <tr>
-                                    <td>{{$category->id}}</td>
+                                    <td>{{$category->id}}
                                     <td>{{$category->category_name}}</td>
+                                    <td>{{isset($category->parentcategory->category_name) ? $category->parentcategory->category_name : "Root"}}</td>
+                                    <td>{{$category->section->name}}</td>
                                     <td>{{$category->url}}</td>
                                     <td>
                                         @if($category->status == 1)
@@ -54,6 +81,10 @@
                                             <a class="updateCategoryStatus text-danger" id="category-{{$category->id}}" category_id="{{$category->id}}" href="javascript:void(0)">
                                                 Inactive</a>
                                         @endif
+                                    </td>
+                                    <td>
+                                        <a href="{{url('admin/add-edit-category/'.$category->id)}}" title="Edit Category" data-toggle="tooltip" data-placement="top"><i class="far fa-edit"></i></a>
+                                        <a href="#" class="text-danger" title="Delete Category" data-toggle="tooltip" data-placement="top"><i class="far fa-trash-alt"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach

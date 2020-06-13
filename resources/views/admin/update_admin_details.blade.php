@@ -50,7 +50,7 @@
                                     $('.alert').slideUp();
                                 }, 10000)
                             </script>
-                    @endif
+                        @endif
                         <!-- form start -->
                         <form role="form" method="post" action="{{url('/admin/update-admin-details')}}" name="updateAdminDetails" id="updateAdminDetails" enctype="multipart/form-data">
                             @csrf

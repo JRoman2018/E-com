@@ -15,6 +15,9 @@
     <link rel="stylesheet" href="{{url('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
     <!-- iCheck -->
     <link rel="stylesheet" href="{{url('plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{url('plugins/select2/css/select2.min.css')}}">
+    <link rel="stylesheet" href="{{url('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
     <!-- JQVMap -->
     <link rel="stylesheet" href="{{url('plugins/jqvmap/jqvmap.min.css')}}">
     <!-- Theme style -->
@@ -85,6 +88,13 @@
 <script src="{{url('js/admin_js/demo.js')}}"></script>
 <!-- Custom AdminLTE JS -->
 <script src="{{url('js/admin_js/admin_scripts.js')}}"></script>
+<!-- Select2 -->
+<script>
+$(function(){
+    $('.select2').select2()
+});
+</script>
+<script src="{{url('plugins/select2/js/select2.full.min.js')}}"></script>
 <!-- DataTables -->
 <script src="{{url('plugins/datatables/jquery.dataTables.min.js')}}"></script>
 <script src="{{url('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
