@@ -92,6 +92,13 @@
                                             <span class="input-group-text" id="">Upload</span>
                                         </div>
                                     </div>
+                                    @if(!empty($categorydata['category_image']))
+                                        <div><img style="width: 80px; margin-top: 5px;" src="{{asset('images/category_images/'.$categorydata['category_image'])}}" alt="">
+                                        &nbsp;<a href="{{url('admin/delelte-category-image/'.$categorydata['id'])}}" class="text-danger" title="Delete Image" data-toggle="tooltip" data-placement="right"><i class="far fa-trash-alt"></i></a>
+
+                                        </div>
+                                        <input type="hidden" name="current_admin_image" value="{{Auth::guard('admin')->user()->image}}" >
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -140,7 +147,8 @@
                     </div>
 
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-primary">{{$title=="Add Category" ? "Submit" : "Update"}}</button>
+                        <button type="submit" class="btn btn-{{$title=="Add Category" ? 'primary' : 'success'}}">
+                            {{$title=="Add Category" ? "Submit" : "Update"}}</button>
                     </div>
                 </div>
             </form>

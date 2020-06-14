@@ -38,13 +38,17 @@ class CategoryController extends Controller
             $category = New Category;
             $categorydata = array();
             $getCategories = array();
+            $message = "Category added successfully!";
         else:
             $title = "Edit Category";
             //Edit Category Funtionality
             $categorydata = Category::where('id',$id)->first();
             $getCategories = Category::with('subcategories')->where(['parent_id' => 0, 'section_id' => $categorydata['section_id']])->get();
-            $categories = json_decode(json_encode($getCategories));
-            "<pre>"; print_r($categories); die;
+//            $getCategories = json_decode(json_encode($getCategories), true);
+//            "<pre>"; print_r($getCategories); die;
+//        return $getCategories;
+            $category = Category::findOrFail($id);
+            $message = "Category updated successfully!";
         endif;
 
         if($request->isMethod('post')){
@@ -70,10 +74,12 @@ class CategoryController extends Controller
             if($request->hasFile('category_image')):
                 $image_tmp = $request->file('category_image');
                 if ($image_tmp->isValid()):
+                    //Get  Image Name
+                    $img_name = $image_tmp->getClientOriginalName();
                     //Get Image Extensions
                     $extention = $image_tmp->getClientOriginalExtension();
                     //Generate New Image Name
-                    $imageName = rand(111,99999).'.'.$extention;
+                    $imageName = $img_name.'-'.rand(111,99999).'.'.$extention;
                     $imagePath = 'images/category_images/'.$imageName;
                     //Upload the Image
                     Image::make($image_tmp)->save($imagePath);
@@ -94,10 +100,9 @@ class CategoryController extends Controller
             $category->status = 1;
             $category->save();
 
-            Session::flash('success_message', 'Category added successfully!');
+            Session::flash('success_message', $message);
             return redirect('admin/categories');
         }
-
 
         //Get All Sections
         $getSections = Section::get();

@@ -21,7 +21,7 @@
             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <!-- User image -->
                 <li class="user-header bg-primary">
-                    <img src="{{url('images/admin_images/admin_photos/'.Auth::guard('admin')->user()->image)}}" class="img-circle elevation-2" alt="User Image">
+                    <img src="{{isset(Auth::guard('admin')->user()->image) ? asset('images/admin_images/admin_photos/'.Auth::guard('admin')->user()->image) : asset('images/admin_images/avatar2.png')}}" class="img-circle elevation-2" alt="User Image">
 
                     <p>
                         {{ucwords(Auth::guard('admin')->user()->name)}} - Web Developer
