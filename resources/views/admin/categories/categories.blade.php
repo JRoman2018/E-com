@@ -83,8 +83,9 @@
                                         @endif
                                     </td>
                                     <td>
+
                                         <a href="{{url('admin/add-edit-category/'.$category->id)}}" title="Edit Category" data-toggle="tooltip" data-placement="top"><i class="far fa-edit"></i></a>
-                                        <a href="#" class="text-danger" title="Delete Category" data-toggle="tooltip" data-placement="top"><i class="far fa-trash-alt"></i></a>
+                                        <a href="javascript:void(0){{--{{url('admin/delete-category/'.$category->id)}}--}}" class="confirmDelete text-danger" record="category" recordid="{{$category->id}}" title="Delete Category" data-toggle="tooltip" data-placement="top"><i class="far fa-trash-alt"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach

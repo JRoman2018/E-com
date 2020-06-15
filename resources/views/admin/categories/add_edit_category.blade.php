@@ -92,10 +92,11 @@
                                             <span class="input-group-text" id="">Upload</span>
                                         </div>
                                     </div>
+
                                     @if(!empty($categorydata['category_image']))
                                         <div><img style="width: 80px; margin-top: 5px;" src="{{asset('images/category_images/'.$categorydata['category_image'])}}" alt="">
-                                        &nbsp;<a href="{{url('admin/delelte-category-image/'.$categorydata['id'])}}" class="text-danger" title="Delete Image" data-toggle="tooltip" data-placement="right"><i class="far fa-trash-alt"></i></a>
-
+                                        &nbsp;<a href="javascript:void(0)" record="category-image" recordid="{{$categorydata['id']}}"{{--href="{{url('admin/delete-category-image/'.$categorydata['id'])}}"--}}
+                                            class="confirmDelete text-danger" title="Delete Image" data-toggle="tooltip" data-placement="right"><i class="far fa-trash-alt"></i></a>
                                         </div>
                                         <input type="hidden" name="current_admin_image" value="{{Auth::guard('admin')->user()->image}}" >
                                     @endif
