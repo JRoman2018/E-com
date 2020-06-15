@@ -46,6 +46,9 @@ Route::prefix('/admin')->namespace('Admin')->group(function (){
         Route::post('append-categories-level','CategoryController@appendCategoriesLevel');
         Route::get('delete-category-image/{id}', 'CategoryController@deleteCategoryImage');
         Route::get('delete-category/{id}', 'CategoryController@deleteCategory');
+
+        //Products
+
     });
 
 });
