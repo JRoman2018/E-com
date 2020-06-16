@@ -58,9 +58,9 @@
                     </ul>
                 </li>
                 <li class="nav-item has-treeview
-                {{Session::get('page') ==  'sections' || Session::get('page') ==  'categories' ? 'menu-open' : ""}}">
+                {{Session::get('page') ==  'sections' || Session::get('page') ==  'categories' || Session::get('page') ==  'products' ? 'menu-open' : ""}}">
                     <a href="{{url('admin/sections')}}" class="nav-link
-                    {{Session::get('page') ==  'sections' || Session::get('page') ==  'categories' ? 'active' : ""}}">
+                    {{Session::get('page') ==  'sections' || Session::get('page') ==  'categories' || Session::get('page') ==  'products' ? 'active' : ""}}">
                         <i class="nav-icon fas fa-layer-group"></i>
                         <p>
                             Catalogues
@@ -78,6 +78,12 @@
                             <a href="{{url('admin/categories')}}" class="nav-link {{Session::get('page') ==  'categories'? 'active' : ""}}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Categories</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{url('admin/products')}}" class="nav-link {{Session::get('page') ==  'products'? 'active' : ""}}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Products</p>
                             </a>
                         </li>
                     </ul>

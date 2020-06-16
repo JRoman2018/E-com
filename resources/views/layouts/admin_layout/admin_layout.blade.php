@@ -102,7 +102,15 @@ $(function(){
 <script src="{{url('plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
 <script>
 $(function () {
-    $("#sections" && "#categories").DataTable({
+    $("#sections").DataTable({
+        "responsive": true,
+        "autoWidth": false,
+    });
+    $("#categories").DataTable({
+        "responsive": true,
+        "autoWidth": false,
+    });
+    $("#products").DataTable({
         "responsive": true,
         "autoWidth": false,
     });
