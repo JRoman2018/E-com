@@ -20,6 +20,22 @@
         });
      });
 
+     //DataTables
+     $(function () {
+         $("#sections").DataTable({
+             "responsive": true,
+             "autoWidth": false,
+         });
+         $("#categories").DataTable({
+             "responsive": true,
+             "autoWidth": false,
+         });
+         $("#products").DataTable({
+             "responsive": true,
+             "autoWidth": false,
+         });
+     });
+
     //Update Section Status
      $(".updateSectionStatus").click(function () {
         var status = $(this).text();

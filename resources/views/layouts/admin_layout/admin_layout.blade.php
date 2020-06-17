@@ -100,22 +100,6 @@ $(function(){
 <script src="{{url('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
 <script src="{{url('plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
 <script src="{{url('plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
-<script>
-$(function () {
-    $("#sections").DataTable({
-        "responsive": true,
-        "autoWidth": false,
-    });
-    $("#categories").DataTable({
-        "responsive": true,
-        "autoWidth": false,
-    });
-    $("#products").DataTable({
-        "responsive": true,
-        "autoWidth": false,
-    });
-});
-</script>
 {{--Sweet Alert Confirm Deletion--}}
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <script src="sweetalert2.min.js"></script>
