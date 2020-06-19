@@ -40,4 +40,14 @@ class ProductController extends Controller
         $product->delete();
         return back()->with('success_message', 'Product has been deleted successfully!');
     }
+
+    public function addEditProduct(Request $request, $id=null){
+        if($id = ""):
+            $title ="Addd Product";
+        else:
+            $title = "Edit Product";
+        endif;
+
+        return view('admin.products.add_edit_product',compact('title'));
+    }
 }
