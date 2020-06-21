@@ -48,6 +48,13 @@ class ProductController extends Controller
             $title = "Edit Product";
         endif;
 
-        return view('admin.products.add_edit_product',compact('title'));
+        //Filter Arrays.
+        $fabricArray = array('Cotton', 'Polyester', 'Wool');
+        $sleveeArray = array('Full Sleeve', 'Half Sleeve', 'Short Sleeve', 'Sleeveless');
+        $patternArray = array('Checked', 'Plain', 'Printed', 'Self', 'Solid');
+        $fitArray = array('Regular', 'Slim');
+        $ocassionArray = array('Casual', 'Formal');
+
+        return view('admin.products.add_edit_product',compact('title', 'fabricArray', 'sleveeArray', 'patternArray', 'fitArray', 'ocassionArray'));
     }
 }

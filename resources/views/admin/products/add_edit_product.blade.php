@@ -80,26 +80,53 @@ A
                                 </div>
 
                                 <div class="col-md-6">
-
                                     <div class="form-group">
-                                        <label for="exampleInputFile">File input</label>
+                                        <label for="product_code">Product Code</label>
+                                        <input type="text" class="form-control" name="product_code"
+                                               id="product_code" placeholder="Enter Product Code"
+                                               value="{{!empty($productdata['id']) ? $productdata['product_code'] : (old('product_code'))}}" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="product_color">Product Color</label>
+                                        <input type="text" class="form-control" name="product_color"
+                                               id="product_color" placeholder="Enter Product Color"
+                                               value="{{!empty($productdata['id']) ? $productdata['product_color'] : (old('product_color'))}}" >
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="product_price">Product Price</label>
+                                        <input type="text" class="form-control" name="product_price"
+                                               id="product_price" placeholder="Enter Product Price"
+                                               value="{{!empty($productdata['id']) ? $productdata['product_price'] : (old('product_price'))}}" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="product_discount">Product Discount (%)</label>
+                                        <input type="text" class="form-control" name="product_discount"
+                                               id="product_discount" placeholder="Enter Product Discount"
+                                               value="{{!empty($productdata['id']) ? $productdata['product_discount'] : (old('product_discount'))}}" >
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="product_weight">Product Weight</label>
+                                        <input type="text" class="form-control" name="product_weight"
+                                               id="product_weight" placeholder="Enter Product Weight"
+                                               value="{{!empty($productdata['id']) ? $productdata['product_weight'] : (old('product_weight'))}}" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="main_image">Product Main Image</label>
                                         <div class="input-group">
                                             <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="product_image" name="product_image" accept="image/*">
-                                                <label class="custom-file-label" for="product_image">Choose file</label>
+                                                <input type="file" class="custom-file-input" id="main_image" name="main_image" accept="image/*">
+                                                <label class="custom-file-label" for="main_image">Choose Image</label>
                                             </div>
                                             <div class="input-group-append">
                                                 <span class="input-group-text" id="">Upload</span>
                                             </div>
                                         </div>
-
-                                        @if(!empty($productdata['product_image']))
-                                            <div><img style="width: 80px; margin-top: 5px;" src="{{asset('images/product_images/'.$productdata['product_image'])}}" alt="">
-                                                &nbsp;<a href="javascript:void(0)" record="product-image" recordid="{{$productdata['id']}}"{{--href="{{url('admin/delete-product-image/'.$productdata['id'])}}"--}}
-                                                class="confirmDelete text-danger" title="Delete Image" data-toggle="tooltip" data-placement="right"><i class="far fa-trash-alt"></i></a>
-                                            </div>
-                                            <input type="hidden" name="current_admin_image" value="{{Auth::guard('admin')->user()->image}}" >
-                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -107,24 +134,29 @@ A
                             <div class="row">
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
-                                        <label for="product_discount">Product Discount</label>
-                                        <input type="text" class="form-control" id="product_discount"
-                                               name="product_discount" placeholder="Enter Product Name"
-                                               value="{{!empty($productdata['id']) ? $productdata['product_discount'] : (old('product_discount'))}}">
+                                        <label for="product_video">Product Video</label>
+                                        <div class="input-group">
+                                            <div class="custom-file">
+                                                <input type="file" class="custom-file-input" id="product_video" name="product_video" accept="image/*">
+                                                <label class="custom-file-label" for="product_video">Choose Image</label>
+                                            </div>
+                                            <div class="input-group-append">
+                                                <span class="input-group-text" id="">Upload</span>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="description">Product Description</label>
                                         <textarea class="form-control" rows="3" id="description"
-                                                  name="description" placeholder="Enter Product Description...">{{!empty($productdata['id']) ? $productdata['description'] : (old('description'))}}</textarea>
+                                          name="description" placeholder="Enter Product Description...">{{!empty($productdata['id']) ? $productdata['description'] : (old('description'))}}</textarea>
                                     </div>
                                 </div>
 
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
-                                        <label for="url">Product URL</label>
-                                        <input type="text" class="form-control" id="url"
-                                               name="url" placeholder="Enter Product Name"
-                                               value="{{!empty($productdata['id']) ? $productdata['url'] : (old('url'))}}">
+                                        <label for="wash_care">Wash Care</label>
+                                        <textarea class="form-control" rows="3" id="wash_care"
+                                                  name="wash_care" placeholder="Enter Product Description...">{{!empty($productdata['id']) ? $productdata['wash_care'] : (old('wash_care'))}}</textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="meta_title">Meta Title</label>
