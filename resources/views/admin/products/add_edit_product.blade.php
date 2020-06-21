@@ -140,6 +140,7 @@
                                                 <span class="input-group-text" id="">Upload</span>
                                             </div>
                                         </div>
+                                        <small>Recommended Image Size: (Width: 1040px, Height: 1200px)</small>
                                     </div>
                                 </div>
                             </div>
@@ -150,8 +151,8 @@
                                         <label for="product_video">Product Video</label>
                                         <div class="input-group">
                                             <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="product_video" name="product_video" accept="image/*">
-                                                <label class="custom-file-label" for="product_video">Choose Image</label>
+                                                <input type="file" class="custom-file-input" id="product_video" name="product_video" accept="video/*">
+                                                <label class="custom-file-label" for="product_video">Choose Video</label>
                                             </div>
                                             <div class="input-group-append">
                                                 <span class="input-group-text" id="">Upload</span>

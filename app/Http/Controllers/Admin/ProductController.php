@@ -6,6 +6,7 @@ use App\Category;
 use App\Http\Controllers\Controller;
 use App\Product, Session;
 use App\Section;
+use Image;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -84,6 +85,50 @@ class ProductController extends Controller
                 $is_featured = "No";
             endif;
 
+            if(empty($data['product_discount'])):
+                $product->product_discount = 0;
+            else:
+                $product->product_discount = $data['product_discount'];
+            endif;
+
+            //Upload Product Image
+            if($request->hasFile('main_image')):
+                $image_tmp = $request->file('main_image');
+                if($image_tmp->isValid()):
+                    //Upload Image after resize
+                    //Get Original Image Name
+                    $image_name = $image_tmp->getClientOriginalName();
+                    //Get Original Image Extension
+                    $extension = $image_tmp->getClientOriginalExtension();
+                    $imageName = $image_name.'-'.rand(111,999999).'.'.$extension;
+                    //Path of the images: Large, Medium, Small
+                    $large_image_path = 'images/product_images/large/'.$imageName;
+                    $medium_image_path = 'images/product_images/medium/'.$imageName;
+                    $small_image_path = 'images/product_images/small/'.$imageName;
+                    //Upload large image
+                    Image::make($image_tmp)->save($large_image_path); // w:1040 H:1200
+                    //Upload medium and small image after resize
+                    Image::make($image_tmp)->resize(520,600)->save($medium_image_path);
+                    Image::make($image_tmp)->resize(260,300)->save($small_image_path);
+                    //Save product main image in products table
+                    $product->main_image = $imageName;
+                endif;
+            endif;
+
+            //Upload Product Video
+            if($request->hasFile('product_video')):
+                $video_tmp = $request->file('product_video');
+                if($video_tmp->isValid()):
+                    $video_name = $video_tmp->getClientOriginalName();
+                    $extension = $video_tmp->getClientOriginalExtension();
+                    $videoName = $video_name.'-'.rand(111,999999).'.'.$extension;
+                    $video_path = 'videos/product_videos/';
+                    $video_tmp->move($video_path,$videoName);
+                    //Save product video in products table
+                    $product->product_video = $videoName;
+                endif;
+            endif;
+
             //Save Product Details in products table
             $categoryDetails = Category::find($data['category_id']);
             $product->section_id = $categoryDetails->section_id;
@@ -91,7 +136,6 @@ class ProductController extends Controller
             $product->product_name = $data['product_name'];
             $product->product_code = $data['product_code'];
             $product->product_color = $data['product_color'];
-            $product->product_discount = $data['product_discount'];
             $product->product_price = $data['product_price'];
             $product->product_weight = $data['product_weight'];
             $product->description = $data['description'];
