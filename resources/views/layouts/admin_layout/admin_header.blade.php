@@ -15,13 +15,13 @@
     <ul class="navbar-nav ml-auto">
         <li class="nav-item dropdown user-menu">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                <img src="{{url('images/admin_images/admin_photos/'.Auth::guard('admin')->user()->image)}}" class="user-image img-circle elevation-2" alt="User Image">
+                <img src="{{!empty(Auth::guard('admin')->user()->image) ? asset('images/admin_images/admin_photos/'.Auth::guard('admin')->user()->image) : asset('images/admin_images/avatar5.png')}}" class="user-image img-circle elevation-2" alt="User Image">
                 <span class="d-none d-md-inline">{{ucwords(Auth::guard('admin')->user()->name)}}</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <!-- User image -->
                 <li class="user-header bg-primary">
-                    <img src="{{isset(Auth::guard('admin')->user()->image) ? asset('images/admin_images/admin_photos/'.Auth::guard('admin')->user()->image) : asset('images/admin_images/avatar2.png')}}" class="img-circle elevation-2" alt="User Image">
+                    <img src="{{!empty(Auth::guard('admin')->user()->image) ? asset('images/admin_images/admin_photos/'.Auth::guard('admin')->user()->image) : asset('images/admin_images/avatar5.png')}}" class="img-circle elevation-2" alt="User Image">
 
                     <p>
                         {{ucwords(Auth::guard('admin')->user()->name)}} - Web Developer

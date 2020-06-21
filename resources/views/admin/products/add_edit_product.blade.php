@@ -72,9 +72,13 @@
                                             @foreach($categories as $section)
                                                 <optgroup label="{{$section['name']}}"></optgroup>
                                                 @foreach($section['categories'] as $category)
-                                                    <option value="{{$category->id}}">&nbsp;&nbsp;&nbsp; &#8594; &nbsp;{{$category->category_name}}</option>
+                                                    <option value="{{$category->id}}"
+                                                        {{!empty(old('category_id')) && $category->id == old('category_id') ? "selected" : ""}}>
+                                                        &nbsp;&nbsp;&nbsp; &#8594; &nbsp;{{$category->category_name}}</option>
                                                     @foreach($category['subcategories'] as $subcategory)
-                                                        <option value="{{$subcategory->id}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 	- &nbsp;&nbsp;{{$subcategory->category_name}}</option>
+                                                        <option value="{{$subcategory->id}}"
+                                                            {{!empty(old('category_id')) && $subcategory->id == old('category_id') ? "selected" : ""}}>
+                                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 	- &nbsp;&nbsp;{{$subcategory->category_name}}</option>
                                                     @endforeach
                                                 @endforeach
                                             @endforeach
@@ -84,7 +88,7 @@
                                         <label for="product_name">Product Name</label>
                                         <input type="text" class="form-control" name="product_name"
                                                id="product_name" placeholder="Enter Product Name"
-                                               value="{{!empty($productdata['id']) ? $productdata['product_name'] : (old('product_name'))}}" >
+                                               value="{{!empty($productdata['product_name']) ? $productdata['product_name'] : (old('product_name'))}}" >
                                     </div>
                                 </div>
 
@@ -93,13 +97,13 @@
                                         <label for="product_code">Product Code</label>
                                         <input type="text" class="form-control" name="product_code"
                                                id="product_code" placeholder="Enter Product Code"
-                                               value="{{!empty($productdata['id']) ? $productdata['product_code'] : (old('product_code'))}}" >
+                                               value="{{!empty($productdata['product_code']) ? $productdata['product_code'] : (old('product_code'))}}" >
                                     </div>
                                     <div class="form-group">
                                         <label for="product_color">Product Color</label>
                                         <input type="text" class="form-control" name="product_color"
                                                id="product_color" placeholder="Enter Product Color"
-                                               value="{{!empty($productdata['id']) ? $productdata['product_color'] : (old('product_color'))}}" >
+                                               value="{{!empty($productdata['product_color']) ? $productdata['product_color'] : (old('product_color'))}}" >
                                     </div>
                                 </div>
 
@@ -108,13 +112,13 @@
                                         <label for="product_price">Product Price</label>
                                         <input type="text" class="form-control" name="product_price"
                                                id="product_price" placeholder="Enter Product Price"
-                                               value="{{!empty($productdata['id']) ? $productdata['product_price'] : (old('product_price'))}}" >
+                                               value="{{!empty($productdata['product_price']) ? $productdata['product_price'] : (old('product_price'))}}" >
                                     </div>
                                     <div class="form-group">
                                         <label for="product_discount">Product Discount (%)</label>
                                         <input type="text" class="form-control" name="product_discount"
                                                id="product_discount" placeholder="Enter Product Discount"
-                                               value="{{!empty($productdata['id']) ? $productdata['product_discount'] : (old('product_discount'))}}" >
+                                               value="{{!empty($productdata['product_discount']) ? $productdata['product_discount'] : (old('product_discount'))}}" >
                                     </div>
                                 </div>
 
@@ -123,7 +127,7 @@
                                         <label for="product_weight">Product Weight</label>
                                         <input type="text" class="form-control" name="product_weight"
                                                id="product_weight" placeholder="Enter Product Weight"
-                                               value="{{!empty($productdata['id']) ? $productdata['product_weight'] : (old('product_weight'))}}" >
+                                               value="{{!empty($productdata['product_weight']) ? $productdata['product_weight'] : (old('product_weight'))}}" >
                                     </div>
                                     <div class="form-group">
                                         <label for="main_image">Product Main Image</label>
@@ -157,7 +161,7 @@
                                     <div class="form-group">
                                         <label for="description">Product Description</label>
                                         <textarea class="form-control" rows="3" id="description"
-                                          name="description" placeholder="Enter Product Description...">{{!empty($productdata['id']) ? $productdata['description'] : (old('description'))}}</textarea>
+                                          name="description" placeholder="Enter Product Description...">{{!empty($productdata['description']) ? $productdata['description'] : (old('description'))}}</textarea>
                                     </div>
                                 </div>
 
@@ -165,14 +169,15 @@
                                     <div class="form-group">
                                         <label for="wash_care">Wash Care</label>
                                         <textarea class="form-control" rows="3" id="wash_care"
-                                                  name="wash_care" placeholder="Enter Product Description...">{{!empty($productdata['id']) ? $productdata['wash_care'] : (old('wash_care'))}}</textarea>
+                                                  name="wash_care" placeholder="Enter Product Description...">{{!empty($productdata['wash_care']) ? $productdata['wash_care'] : (old('wash_care'))}}</textarea>
                                     </div>
                                     <div class="form-group">
                                         <label>Select Fabric</label>
                                         <select name="fabric" id="fabric" class="form-control select2" style="width: 100%;">
                                             <option value="">Select</option>
                                             @foreach($fabricArray as $fabric)
-                                                <option value="{{$fabric}}">{{$fabric}}</option>
+                                                <option value="{{$fabric}}"
+                                                    {{!empty(old('fabric')) && $fabric == old('fabric') ? "selected" : ""}}>{{$fabric}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -184,7 +189,8 @@
                                         <select name="sleeve" id="sleeve" class="form-control select2" style="width: 100%;">
                                             <option value="">Select</option>
                                             @foreach($sleveeArray as $slevee)
-                                                <option value="{{$slevee}}">{{$slevee}}</option>
+                                                <option value="{{$slevee}}"
+                                                    {{!empty(old('sleeve')) && $slevee == old('sleeve') ? "selected" : ""}}>{{$slevee}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -193,7 +199,8 @@
                                         <select name="pattern" id="pattern" class="form-control select2" style="width: 100%;">
                                             <option value="">Select</option>
                                             @foreach($patternArray as $pattern)
-                                                <option value="{{$pattern}}">{{$pattern}}</option>
+                                                <option value="{{$pattern}}"
+                                                    {{!empty(old('pattern')) && $pattern == old('pattern') ? "selected" : ""}}>{{$pattern}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -206,7 +213,8 @@
                                         <select name="fit" id="fit" class="form-control select2" style="width: 100%;">
                                             <option value="">Select</option>
                                             @foreach($fitArray as $fit)
-                                                <option value="{{$fit}}">{{$fit}}</option>
+                                                <option value="{{$fit}}"
+                                                    {{!empty(old('fit')) && $fit == old('fit') ? "selected" : ""}}>{{$fit}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -215,7 +223,8 @@
                                         <select name="occasion" id="occasion" class="form-control select2" style="width: 100%;">
                                             <option value="">Select</option>
                                             @foreach($ocassionArray as $occasion)
-                                                <option value="{{$occasion}}">{{$occasion}}</option>
+                                                <option value="{{$occasion}}"
+                                                    {{!empty(old('occasion')) && $occasion == old('occasion') ? "selected" : ""}}>{{$occasion}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -224,24 +233,24 @@
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                         <label for="meta_title">Meta Title</label>
-                                        <textarea class="form-control" rows="3" id="meta_title" name="meta_title" placeholder="Enter Meta Description...">{{!empty($productdata['id']) ? $productdata['meta_title'] : (old('meta_title'))}}</textarea>
+                                        <textarea class="form-control" rows="3" id="meta_title" name="meta_title" placeholder="Enter Meta Description...">{{!empty($productdata['meta_title']) ? $productdata['meta_title'] : (old('meta_title'))}}</textarea>
                                     </div>
                                 </div>
 
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                         <label for="meta_description">Meta Description</label>
-                                        <textarea class="form-control" rows="3" id="meta_description" name="meta_description" placeholder="Enter Meta Description...">{{!empty($productdata['id']) ? $productdata['meta_description'] : (old('meta_description'))}}</textarea>
+                                        <textarea class="form-control" rows="3" id="meta_description" name="meta_description" placeholder="Enter Meta Description...">{{!empty($productdata['meta_description']) ? $productdata['meta_description'] : (old('meta_description'))}}</textarea>
                                     </div>
                                 </div>
                                 <div class="col-12 col-sm-6">
                                     <div class="form-group">
                                         <label for="meta_keywords">Meta Keywords</label>
-                                        <textarea class="form-control" rows="3" id="meta_keyword" name="meta_keywords" placeholder="Enter Meta Description...">{{!empty($productdata['id']) ? $productdata['meta_keywords'] : (old('meta_keywords'))}}</textarea>
+                                        <textarea class="form-control" rows="3" id="meta_keyword" name="meta_keywords" placeholder="Enter Meta Description...">{{!empty($productdata['meta_keywords']) ? $productdata['meta_keywords'] : (old('meta_keywords'))}}</textarea>
                                     </div>
                                     <div class="form-group">
-                                        <label for="is_feature">Feature Item </label>
-                                        <input type="checkbox" name="is_feature" id="is_feature" value="1">
+                                        <label for="is_featured">Feature Item </label>
+                                        <input type="checkbox" name="is_featured" id="is_featured" value="Yes">
                                     </div>
                                 </div>
                             </div>
