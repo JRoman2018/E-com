@@ -100,6 +100,7 @@ class ProductController extends Controller
                     $image_name = $image_tmp->getClientOriginalName();
                     //Get Original Image Extension
                     $extension = $image_tmp->getClientOriginalExtension();
+//                    echo "<pre>"; print_r($extension); die;
                     $imageName = $image_name.'-'.rand(111,999999).'.'.$extension;
                     //Path of the images: Large, Medium, Small
                     $large_image_path = 'images/product_images/large/'.$imageName;
