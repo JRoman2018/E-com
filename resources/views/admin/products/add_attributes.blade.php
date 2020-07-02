@@ -26,8 +26,8 @@
 
         <section class="content">
             <div class="container-fluid">
-                @if ($errors->any() || Session::has('success_message'))
-                    <div class="alert alert-{{$errors->any() ? 'danger' : 'success'}}" style="display:none; margin-top: 10px;">
+                @if ($errors->any() || Session::has('success_message') || Session::has('error_message'))
+                    <div class="alert @if($errors->any()) alert-danger @elseif(Session::has('error_message')) alert-warning @else alert-success @endif" style="display:none; margin-top: 10px;">
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -37,6 +37,8 @@
                                     <li>{{ $error }}</li>
                                 @endforeach
                             </ul>
+                        @elseif(Session::has('error_message'))
+                            {{Session::get('error_message')}}
                         @else
                             {{Session::get('success_message')}}
                         @endif
@@ -48,7 +50,7 @@
                         }, 10000)
                     </script>
                 @endif
-                <form name="attributeForm" id="attributeForm" method="post" action="{{url('admin/add-attributes/'.$productdata->id)}}">
+                <form name="attributeForm" id="attributeForm" method="post" action="{{url('admin/add-attributes/'.$productdata['id'])}}">
                     @csrf
                     <div class="card card-default">
                         <div class="card-header">
@@ -82,10 +84,10 @@
                                     <div class="form-group">
                                         <div class="field_wrapper">
                                             <div>
-                                                <input id="size" type="text" name="size[]" value="" placeholder="Size" style="width: 120px"/>
-                                                <input id="sku" type="text" name="sku[]" value="" placeholder="SKU"  style="width: 120px"/>
-                                                <input id="price" type="text" name="price[]" value="" placeholder="Price"  style="width: 120px"/>
-                                                <input id="stock" type="text" name="stock[]" value="" placeholder="Stock"  style="width: 120px"/>
+                                                <input id="size" type="text" name="size[]" placeholder="Size" style="width: 120px" required/>
+                                                <input id="sku" type="text" name="sku[]" placeholder="SKU"  style="width: 120px" required/>
+                                                <input id="price" type="number" name="price[]" placeholder="Price"  style="width: 120px" required/>
+                                                <input id="stock" type="number" name="stock[]" placeholder="Stock"  style="width: 120px" required/>
                                                 <a href="javascript:void(0);" class="add_button" title="Add field" data-toggle="tooltip" data-placement="top"><i class="fas fa-plus"></i></a>
                                             </div>
                                         </div>
@@ -100,6 +102,39 @@
                         </div>
                     </div>
                 </form>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Added Product Attributes</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="products_attribute" class="table table-bordered table-striped">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Size</th>
+                                    <th>SKU</th>
+                                    <th>Price</th>
+                                    <th>Stock</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($productdata['attributes'] as $attribute)
+                                    <tr>
+                                        <td>{{$attribute['id']}}
+                                        <td>{{$attribute['size']}}</td>
+                                        <td>{{$attribute['sku']}}</td>
+                                        <td>{{$attribute['price']}}</td>
+                                        <td>{{$attribute['stock']}}</td>
+                                        <td></td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
             </div>
         </section>
     </div>

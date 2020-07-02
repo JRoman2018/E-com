@@ -34,6 +34,10 @@
              "responsive": true,
              "autoWidth": false,
          });
+         $("#products_attribute").DataTable({
+             "responsive": true,
+             "autoWidth": false,
+         });
      });
 
     //Update Section Status
@@ -115,7 +119,7 @@
      var maxField = 10; //Input fields increment limitation
      var addButton = $('.add_button'); //Add button selector
      var wrapper = $('.field_wrapper'); //Input field wrapper
-     var fieldHTML = '<div class="py-1"><input type="text" name="size[]" style="width: 120px" placeholder="Size"/>&nbsp;<input type="text" name="sku[]" style="width: 120px" placeholder="SKU"/>&nbsp;<input type="text" name="price[]" style="width: 120px" placeholder="Price"/>&nbsp;<input type="text" name="stock[]" style="width: 120px" placeholder="Stock"/><a href="javascript:void(0);" class="remove_button p-1" title="Remove field"><i class="fas fa-minus"></i></a></div>'; //New input field html
+     var fieldHTML = '<div class="py-1"><input type="text" name="size[]" style="width: 120px" placeholder="Size" required/>&nbsp;<input type="text" name="sku[]" style="width: 120px" placeholder="SKU" required/>&nbsp;<input type="number" name="price[]" style="width: 120px" placeholder="Price" required/>&nbsp;<input type="number" name="stock[]" style="width: 120px" placeholder="Stock" required/><a href="javascript:void(0);" class="remove_button p-1" title="Remove field"><i class="fas fa-minus"></i></a></div>'; //New input field html
      var x = 1; //Initial field counter is 1
 
      //Once add button is clicked

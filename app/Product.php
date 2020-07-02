@@ -13,4 +13,8 @@ class Product extends Model
     public function section(){
         return $this->belongsTo('App\Section', 'section_id');
     }
+
+    public function attributes(){
+        return $this->hasMany('App\ProductsAttribute');
+    }
 }

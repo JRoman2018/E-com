@@ -231,10 +231,39 @@ class ProductController extends Controller
     public function addAttributes(Request $request, $id){
         if($request->isMethod('post')):
             $data = $request->all();
-            $productAtributes = new ProductsAttribute;
+            foreach ($data['sku'] as $key => $value){
+                if(!empty($value)){
+                    //SKU already exists check
+                    $attrCountSKU = ProductsAttribute::where('sku',$value)->count();
+                    if($attrCountSKU>0){
+                        $message = "SKU already exists. Please add another SKU!";
+                        Session::flash('error_message',$message);
+                        return back();
+                    }
+                    //Size already exists check
+                    $attrCountSize = ProductsAttribute::where(['product_id'=>$id ,'size' => $data['size'][$key]])->count();
+                    if($attrCountSize>0){
+                        $message = "Size already exists. Please add another Size!";
+                        Session::flash('error_message',$message);
+                        return back();
+                    }
+
+                    $atributes = new ProductsAttribute;
+                    $atributes->product_id = $id;
+                    $atributes->sku = $value;
+                    $atributes->size = $data['size'][$key];
+                    $atributes->price = $data['price'][$key];
+                    $atributes->stock = $data['stock'][$key];
+                    $atributes->status = 0;
+                        $atributes->save();
+                }
+            }
+            $success_message = "Product Attributes has been added successfully!";
+            Session::flash('success_message',$success_message);
+            return back();
         endif;
-        $productdata = Product::findOrfail($id);
-//        $productdata = json_decode(json_encode($productdata), true);
+        $productdata = Product::select('id','product_name','product_code','product_color','main_image')->with('attributes')->findOrfail($id);
+        $productdata = json_decode(json_encode($productdata), true);
 //        echo "<pre>"; print_r($productdata); die;
         $title = "Products Attributes";
 
