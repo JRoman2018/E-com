@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Category;
 use App\Http\Controllers\Controller;
 use App\Product, Session;
+use App\ProductsAttribute;
 use App\Section;
 use Image;
 use Illuminate\Http\Request;
@@ -227,7 +228,16 @@ class ProductController extends Controller
         return back()->with('success_message', 'Product Video has been deleted successfully!');
     }
 
-    public function addAttributes($id){
+    public function addAttributes(Request $request, $id){
+        if($request->isMethod('post')):
+            $data = $request->all();
+            $productAtributes = new ProductsAttribute;
+        endif;
+        $productdata = Product::findOrfail($id);
+//        $productdata = json_decode(json_encode($productdata), true);
+//        echo "<pre>"; print_r($productdata); die;
+        $title = "Products Attributes";
 
+        return view('admin.products.add_attributes',compact('productdata', 'title'));
     }
 }
