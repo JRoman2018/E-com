@@ -48,10 +48,15 @@ class ProductController extends Controller
         if($id==""):
             $title ="Add Product";
             $product = new Product;
+            $productdata = array();
+            $message = "Product added successfully!";
         else:
             $title = "Edit Product";
-            $productdata = Product::where('id',$id)->first();
-
+            $productdata = Product::findOrFail($id);
+//            $productdata = json_decode(json_encode($productdata));
+//            echo "<pre>"; print_r($productdata); die;
+            $product = Product::findOrFail($id);
+            $message = "Product Upated successfully!";
         endif;
 
         if($request->isMethod('post')):
@@ -82,7 +87,9 @@ class ProductController extends Controller
             $this->validate($request, $rules, $customMessages);
 
             if(empty($data['is_featured'])):
-                $is_featured = "No";
+                $product->is_featured = "No";
+            else:
+                $product->is_featured = $data['is_featured'];
             endif;
 
             if(empty($data['product_discount'])):
@@ -100,7 +107,7 @@ class ProductController extends Controller
                     $image_name = $image_tmp->getClientOriginalName();
                     //Get Original Image Extension
                     $extension = $image_tmp->getClientOriginalExtension();
-//                    echo "<pre>"; print_r($extension); die;
+                    //echo "<pre>"; print_r($extension); die;
                     $imageName = $image_name.'-'.rand(111,999999).'.'.$extension;
                     //Path of the images: Large, Medium, Small
                     $large_image_path = 'images/product_images/large/'.$imageName;
@@ -149,12 +156,12 @@ class ProductController extends Controller
             $product->meta_title = $data['meta_title'];
             $product->meta_description = $data['meta_description'];
             $product->meta_keywords = $data['meta_keywords'];
-            $product->is_featured = $is_featured;
+
             $product->status = 1;
             $product->save();
 //            echo "<pre>"; print_r($categoryDetails); die;
 
-            Session::flash('success_message', "Product added successfully!");
+            Session::flash('success_message',$message);
             return redirect('admin/products');
         endif;
 
@@ -170,6 +177,57 @@ class ProductController extends Controller
 //        $categories = json_decode(json_encode($categories), true);
 //        echo "<pre>"; print_r($categories); die;
 
-        return view('admin.products.add_edit_product',compact('categories','title', 'fabricArray', 'sleveeArray', 'patternArray', 'fitArray', 'ocassionArray'));
+        return view('admin.products.add_edit_product',compact(
+            'categories',
+            'title',
+            'fabricArray',
+            'sleveeArray',
+            'patternArray',
+            'fitArray',
+            'productdata',
+            'ocassionArray'));
+    }
+
+
+    public function deleteProductImage($id){
+        //Get Product Image
+        $productImage = Product::select('main_image')->where('id',$id)->first();
+
+        //Get Product Image Path
+        $product_large_image_path = 'images/product_images/large/';
+        $product_medium_image_path = 'images/product_images/medium/';
+        $product_small_image_path = 'images/product_images/small/';
+
+        //Delete Product Image from category_images folder
+        if(file_exists($product_small_image_path.$productImage->main_image)){
+            unlink($product_large_image_path.$productImage->main_image);
+            unlink($product_medium_image_path.$productImage->main_image);
+            unlink($product_small_image_path.$productImage->main_image);
+        }
+
+        //Delete Product Image from categories table
+        Product::where('id',$id)->update(['main_image' => '']);
+        return back()->with('success_message', 'Product Image has been deleted successfully!');
+    }
+
+    public function deleteProductVideo($id){
+        //Get Product Image
+        $productVideo = Product::select('product_video')->where('id',$id)->first();
+
+        //Get Product Image Path
+        $product_video_path = 'videos/product_videos/';
+
+        //Delete Product Image from category_images folder
+        if(file_exists($product_video_path.$productVideo->product_video)){
+            unlink($product_video_path.$productVideo->product_video);
+        }
+
+        //Delete Product Image from categories table
+        Product::where('id',$id)->update(['product_video' => '']);
+        return back()->with('success_message', 'Product Video has been deleted successfully!');
+    }
+
+    public function addAttributes($id){
+
     }
 }

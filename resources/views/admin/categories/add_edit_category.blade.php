@@ -98,7 +98,6 @@
                                         &nbsp;<a href="javascript:void(0)" record="category-image" recordid="{{$categorydata['id']}}"{{--href="{{url('admin/delete-category-image/'.$categorydata['id'])}}"--}}
                                             class="confirmDelete text-danger" title="Delete Image" data-toggle="tooltip" data-placement="right"><i class="far fa-trash-alt"></i></a>
                                         </div>
-                                        <input type="hidden" name="current_admin_image" value="{{Auth::guard('admin')->user()->image}}" >
                                     @endif
                                 </div>
                             </div>

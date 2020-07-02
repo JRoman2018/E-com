@@ -95,7 +95,8 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="{{url('admin/add-edit-product/'.$product->id)}}" title="Edit Product" data-toggle="tooltip" data-placement="top"><i class="far fa-edit"></i></a>
+                                                <a href="{{url('admin/add-attributes/'.$product->id)}}" class="text-dark mr-1" title="Add/Edit Attributes" data-toggle="tooltip" data-placement="top"><i class="fas fa-plus"></i></a>
+                                                <a href="{{url('admin/add-edit-product/'.$product->id)}}" class="mr-1" title="Edit Product" data-toggle="tooltip" data-placement="top"><i class="far fa-edit"></i></a>
                                                 <a href="javascript:void(0){{--{{url('admin/delete-category/'.$product->id)}}--}}" class="confirmDelete text-danger" record="product" recordid="{{$product->id}}" title="Delete Product" data-toggle="tooltip" data-placement="top"><i class="far fa-trash-alt"></i></a>
                                             </td>
                                         </tr>

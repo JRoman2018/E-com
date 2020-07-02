@@ -73,11 +73,13 @@
                                                 <optgroup label="{{$section['name']}}"></optgroup>
                                                 @foreach($section['categories'] as $category)
                                                     <option value="{{$category->id}}"
-                                                        {{!empty(old('category_id')) && $category->id == old('category_id') ? "selected" : ""}}>
+                                                        {{!empty(old('category_id')) && $category->id == old('category_id') ? "selected" : ""}}
+                                                        {{!empty($productdata['category_id']) && $productdata['category_id'] == $category->id  ? "selected" : ""}}>
                                                         &nbsp;&nbsp;&nbsp; &#8594; &nbsp;{{$category->category_name}}</option>
                                                     @foreach($category['subcategories'] as $subcategory)
                                                         <option value="{{$subcategory->id}}"
-                                                            {{!empty(old('category_id')) && $subcategory->id == old('category_id') ? "selected" : ""}}>
+                                                            {{!empty(old('category_id')) && $subcategory->id == old('category_id') ? "selected" : ""}}
+                                                            {{!empty($productdata['category_id']) && $productdata['category_id'] == $subcategory->id  ? "selected" : ""}}>
                                                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 	- &nbsp;&nbsp;{{$subcategory->category_name}}</option>
                                                     @endforeach
                                                 @endforeach
@@ -140,6 +142,12 @@
                                                 <span class="input-group-text" id="">Upload</span>
                                             </div>
                                         </div>
+                                        @if(!empty($productdata['main_image']))
+                                            <div><img style="width: 80px; margin-top: 5px;" src="{{asset('images/product_images/small/'.$productdata['main_image'])}}" alt="">
+                                                &nbsp;<a href="javascript:void(0)" record="product-image" recordid="{{$productdata['id']}}"
+                                                class="confirmDelete text-danger" title="Delete Image" data-toggle="tooltip" data-placement="right"><i class="far fa-trash-alt"></i></a>
+                                            </div>
+                                        @endif
                                         <small>Recommended Image Size: (Width: 1040px, Height: 1200px)</small>
                                     </div>
                                 </div>
@@ -158,6 +166,15 @@
                                                 <span class="input-group-text" id="">Upload</span>
                                             </div>
                                         </div>
+                                        @if(!empty($productdata['product_video']))
+                                            <div class="pt-2">
+                                                <a href="{{asset('videos/product_videos/'.$productdata['product_video'])}}" download>
+                                                    Download
+                                                </a> &nbsp;|&nbsp;
+                                                <a href="javascript:void(0)" record="product-video" recordid="{{$productdata['id']}}"
+                                                   class="confirmDelete text-danger">Delete Video</a>
+                                            </div>
+                                        @endif
                                     </div>
                                     <div class="form-group">
                                         <label for="description">Product Description</label>
@@ -178,7 +195,8 @@
                                             <option value="">Select</option>
                                             @foreach($fabricArray as $fabric)
                                                 <option value="{{$fabric}}"
-                                                    {{!empty(old('fabric')) && $fabric == old('fabric') ? "selected" : ""}}>{{$fabric}}</option>
+                                                    {{!empty(old('fabric')) && $fabric == old('fabric') ? "selected" : ""}}
+                                                    {{!empty($productdata['fabric']) && $fabric == $productdata['fabric'] ? "selected" : ""}}>{{$fabric}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -191,7 +209,8 @@
                                             <option value="">Select</option>
                                             @foreach($sleveeArray as $slevee)
                                                 <option value="{{$slevee}}"
-                                                    {{!empty(old('sleeve')) && $slevee == old('sleeve') ? "selected" : ""}}>{{$slevee}}</option>
+                                                    {{!empty(old('sleeve')) && $slevee == old('sleeve') ? "selected" : ""}}
+                                                    {{!empty($productdata['sleeve']) && $slevee == $productdata['sleeve'] ? "selected" : ""}}>{{$slevee}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -201,7 +220,8 @@
                                             <option value="">Select</option>
                                             @foreach($patternArray as $pattern)
                                                 <option value="{{$pattern}}"
-                                                    {{!empty(old('pattern')) && $pattern == old('pattern') ? "selected" : ""}}>{{$pattern}}</option>
+                                                    {{!empty(old('pattern')) && $pattern == old('pattern') ? "selected" : ""}}
+                                                    {{!empty($productdata['pattern']) && $pattern == $productdata['pattern'] ? "selected" : ""}}>{{$pattern}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -215,7 +235,8 @@
                                             <option value="">Select</option>
                                             @foreach($fitArray as $fit)
                                                 <option value="{{$fit}}"
-                                                    {{!empty(old('fit')) && $fit == old('fit') ? "selected" : ""}}>{{$fit}}</option>
+                                                    {{!empty(old('fit')) && $fit == old('fit') ? "selected" : ""}}
+                                                    {{!empty($productdata['fit']) && $fit == $productdata['fit'] ? "selected" : ""}}>{{$fit}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -225,7 +246,8 @@
                                             <option value="">Select</option>
                                             @foreach($ocassionArray as $occasion)
                                                 <option value="{{$occasion}}"
-                                                    {{!empty(old('occasion')) && $occasion == old('occasion') ? "selected" : ""}}>{{$occasion}}</option>
+                                                    {{!empty(old('occasion')) && $occasion == old('occasion') ? "selected" : ""}}
+                                                    {{!empty($productdata['occasion']) && $occasion == $productdata['occasion'] ? "selected" : ""}}>{{$occasion}}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -251,7 +273,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="is_featured">Feature Item </label>
-                                        <input type="checkbox" name="is_featured" id="is_featured" value="Yes">
+                                        <input type="checkbox" name="is_featured" id="is_featured" value="Yes" {{!empty($productdata['is_featured']) && $productdata['is_featured'] == "Yes"  ? "checked" : ""}}>
                                     </div>
                                 </div>
                             </div>
