@@ -254,8 +254,8 @@ class ProductController extends Controller
                     $atributes->size = $data['size'][$key];
                     $atributes->price = $data['price'][$key];
                     $atributes->stock = $data['stock'][$key];
-                    $atributes->status = 0;
-                        $atributes->save();
+                    $atributes->status = 1;
+                    $atributes->save();
                 }
             }
             $success_message = "Product Attributes has been added successfully!";
@@ -268,5 +268,42 @@ class ProductController extends Controller
         $title = "Products Attributes";
 
         return view('admin.products.add_attributes',compact('productdata', 'title'));
+    }
+
+    public function editAttributes(Request $request){
+        if($request->isMethod('post')):
+            $data = $request->all();
+//            echo "<pre>"; print_r($data); die;
+            foreach ($data['attrId'] as $key => $attr){
+                if(!empty($data['attrId'])){
+                    ProductsAttribute::where(['id'=>$data['attrId'][$key]])
+                        ->update(['price'=>$data['price'][$key], 'stock'=>$data['stock'][$key]]);
+                }
+            }
+            $success_message = "Product Attributes has been updated successfully!";
+            Session::flash('success_message',$success_message);
+            return back();
+        endif;
+    }
+
+    public function updateAttributeStatus(Request $request){
+        if($request->ajax()){
+            $data = $request->all();
+//            echo "<pre>"; print_r($data); die;
+            if($data['status']=="Active"){
+                $status = 0;
+            }else{
+                $status = 1;
+            }
+            ProductsAttribute::where('id',$data['attribute_id'])->update(['status' => $status]);
+            return response()->json(['status' => $status, 'attribute_id' => $data['attribute_id']]);
+        }
+    }
+
+    public function deleteAttributes($id){
+        //Delete Attribute
+        $attribute = ProductsAttribute::where('id', $id)->first();
+        $attribute->delete();
+        return back()->with('success_message', 'Attribute has been deleted successfully!');
     }
 }

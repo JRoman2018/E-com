@@ -50,7 +50,8 @@
                         }, 10000)
                     </script>
                 @endif
-                <form name="attributeForm" id="attributeForm" method="post" action="{{url('admin/add-attributes/'.$productdata['id'])}}">
+
+                <form name="addAttributeForm" id="addAttributeForm" method="post" action="{{url('admin/add-attributes/'.$productdata['id'])}}">
                     @csrf
                     <div class="card card-default">
                         <div class="card-header">
@@ -60,7 +61,6 @@
                                 <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
                             </div>
                         </div>
-
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-6">
@@ -96,45 +96,62 @@
                             </div>
 
                         </div>
-
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary">Add Attributes</button>
                         </div>
                     </div>
                 </form>
+
+                <form name="editAttributeForm" id="editAttributeForm" method="post" action="{{url('admin/edit-attributes/'.$productdata['id'])}}" >
+                    @csrf
                     <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Added Product Attributes</h3>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                            <table id="products_attribute" class="table table-bordered table-striped">
-                                <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Size</th>
-                                    <th>SKU</th>
-                                    <th>Price</th>
-                                    <th>Stock</th>
-                                    <th>Actions</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($productdata['attributes'] as $attribute)
-                                    <tr>
-                                        <td>{{$attribute['id']}}
-                                        <td>{{$attribute['size']}}</td>
-                                        <td>{{$attribute['sku']}}</td>
-                                        <td>{{$attribute['price']}}</td>
-                                        <td>{{$attribute['stock']}}</td>
-                                        <td></td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- /.card-body -->
+                    <div class="card-header">
+                        <h3 class="card-title">Added Product Attributes</h3>
                     </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="products_attribute" class="table table-bordered table-striped">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Size</th>
+                                <th>SKU</th>
+                                <th>Price</th>
+                                <th>Stock</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($productdata['attributes'] as $attribute)
+                                <input type="text" name="attrId[]" value="{{$attribute['id']}}" hidden>
+                                <tr>
+                                    <td>{{$attribute['id']}}</td>
+                                    <td>{{$attribute['size']}}</td>
+                                    <td>{{$attribute['sku']}}</td>
+                                    <td>
+                                        <input type="number" name="price[]" value="{{$attribute['price']}}" required>
+                                    </td>
+                                    <td>
+                                        <input type="number" name="stock[]" value="{{$attribute['stock']}}" required>
+                                    </td>
+                                    <td>
+                                        @if($attribute['status'] == 1)
+                                            <a class="mr-2 updateAttributeStatus text-success" id="attribute-{{$attribute['id']}}" attribute_id="{{$attribute['id']}}" href="javascript:void(0)">Active</a>
+                                        @else
+                                            <a class="mr-2 updateAttributeStatus text-danger" id="attribute-{{$attribute['id']}}" attribute_id="{{$attribute['id']}}" href="javascript:void(0)">Inactive</a>
+                                        @endif
+                                        <a href="javascript:void(0)" class="confirmDelete text-danger" record="attribute" recordid="{{$attribute['id']}}" title="Delete Attribute" data-toggle="tooltip" data-placement="top"><i class="far fa-trash-alt"></i></a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-success">Update Attributes</button>
+                    </div>
+                </div>
+                </form>
             </div>
         </section>
     </div>
