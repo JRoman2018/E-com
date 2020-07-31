@@ -120,6 +120,26 @@
          });
      });
 
+     //Update Image Status
+     $(".updateImageStatus").click(function () {
+         var status = $(this).text();
+         var image_id = $(this).attr("image_id");
+         $.ajax({
+             type:'post',
+             url: '/admin/update-image-status',
+             data: {status:status,image_id:image_id},
+             success:function (resp) {
+                 if(resp['status']==0){
+                     $("#image-"+image_id).html("<a class='updateImageStatus text-danger' href='javascript:void(0)'>Inactive</a>");
+                 }else if(resp['status']==1){
+                     $("#image-"+image_id).html("<a class='updateImageStatus text-success' href='javascript:void(0)'>Active</a>");
+                 }
+             },error:function(){
+                 alert("Error");
+             }
+         });
+     });
+
      //Append Category Level
      $('#section_id').change(function () {
         var section_id = $(this).val();
