@@ -93,11 +93,6 @@ class ProductController extends Controller
                 $product->is_featured = $data['is_featured'];
             endif;
 
-            if(empty($data['product_discount'])):
-                $product->product_discount = 0;
-            else:
-                $product->product_discount = $data['product_discount'];
-            endif;
 
             //Upload Product Image
             if($request->hasFile('main_image')):
