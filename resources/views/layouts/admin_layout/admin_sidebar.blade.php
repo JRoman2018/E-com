@@ -58,9 +58,15 @@
                     </ul>
                 </li>
                 <li class="nav-item has-treeview
-                {{Session::get('page') ==  'sections' || Session::get('page') ==  'categories' || Session::get('page') ==  'products' ? 'menu-open' : ""}}">
+                {{Session::get('page') ==  'sections' ||
+                Session::get('page') ==  'categories' ||
+                Session::get('page') ==  'brands' ||
+                Session::get('page') ==  'products' ? 'menu-open' : ""}}">
                     <a href="{{url('admin/sections')}}" class="nav-link
-                    {{Session::get('page') ==  'sections' || Session::get('page') ==  'categories' || Session::get('page') ==  'products' ? 'active' : ""}}">
+                    {{Session::get('page') ==  'sections' ||
+                    Session::get('page') ==  'categories' ||
+                    Session::get('page') ==  'brands' ||
+                    Session::get('page') ==  'products' ? 'active' : ""}}">
                         <i class="nav-icon fas fa-layer-group"></i>
                         <p>
                             Catalogues
@@ -72,6 +78,12 @@
                             <a href="{{url('admin/sections')}}" class="nav-link {{Session::get('page') ==  'sections'? 'active' : ""}}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Sections</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{url('admin/brands')}}" class="nav-link {{Session::get('page') ==  'brands'? 'active' : ""}}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Brands</p>
                             </a>
                         </li>
                         <li class="nav-item">

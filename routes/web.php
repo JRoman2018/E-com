@@ -13,15 +13,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+
+
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-
+//Admin Panel
 Route::prefix('/admin')->namespace('Admin')->group(function (){
    //All the admin routes will be define here:
 
@@ -38,6 +40,12 @@ Route::prefix('/admin')->namespace('Admin')->group(function (){
         //Sections
         Route::get('sections','SectionController@sections');
         Route::post('update-section-status','SectionController@updateSectionStatus');
+
+        //Brands
+        Route::get('brands', 'BrandController@brands');
+        Route::post('update-brand-status','BrandController@updateBrandStatus');
+        Route::match(['get','post'],'add-edit-brand/{id?}','BrandController@addEditBrand');
+        Route::get('delete-brand/{id}', 'BrandController@deleteBrand');
 
         //Categories
         Route::get('categories','CategoryController@categories');
@@ -69,3 +77,6 @@ Route::prefix('/admin')->namespace('Admin')->group(function (){
 
 });
 
+Route::namespace('Front')->group(function (){
+    Route::get('/', 'IndexController@index');
+});

@@ -135,12 +135,14 @@
                                         <input type="number" name="stock[]" value="{{$attribute['stock']}}" required>
                                     </td>
                                     <td>
+                                        <a href="javascript:void(0)" class="mr-3 confirmDelete text-danger" record="attribute" recordid="{{$attribute['id']}}" title="Delete Attribute" data-toggle="tooltip" data-placement="top"><i class="far fa-trash-alt"></i></a>
                                         @if($attribute['status'] == 1)
-                                            <a class="mr-2 updateAttributeStatus text-success" id="attribute-{{$attribute['id']}}" attribute_id="{{$attribute['id']}}" href="javascript:void(0)">Active</a>
+                                            <a class="mr-2 updateAttributeStatus text-success" id="attribute-{{$attribute['id']}}" attribute_id="{{$attribute['id']}}" href="javascript:void(0)">
+                                                <i class="fas fa-toggle-on text-success" aria-hidden="true" status="Active"></i></a>
                                         @else
-                                            <a class="mr-2 updateAttributeStatus text-danger" id="attribute-{{$attribute['id']}}" attribute_id="{{$attribute['id']}}" href="javascript:void(0)">Inactive</a>
+                                            <a class="mr-2 updateAttributeStatus text-danger" id="attribute-{{$attribute['id']}}" attribute_id="{{$attribute['id']}}" href="javascript:void(0)">
+                                                <i class="fas fa-toggle-off text-danger" aria-hidden="true" status="Inactive"></i></a>
                                         @endif
-                                        <a href="javascript:void(0)" class="confirmDelete text-danger" record="attribute" recordid="{{$attribute['id']}}" title="Delete Attribute" data-toggle="tooltip" data-placement="top"><i class="far fa-trash-alt"></i></a>
                                     </td>
                                 </tr>
                             @endforeach

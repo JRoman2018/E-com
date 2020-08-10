@@ -61,7 +61,6 @@
                                     <th>Parent Category</th>
                                     <th>Section</th>
                                     <th>URL</th>
-                                    <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
                                 </thead>
@@ -74,18 +73,16 @@
                                     <td>{{$category->section->name}}</td>
                                     <td>{{$category->url}}</td>
                                     <td>
-                                        @if($category->status == 1)
-                                            <a class="updateCategoryStatus text-success" id="category-{{$category->id}}" category_id="{{$category->id}}" href="javascript:void(0)">
-                                                Active</a>
-                                        @else
-                                            <a class="updateCategoryStatus text-danger" id="category-{{$category->id}}" category_id="{{$category->id}}" href="javascript:void(0)">
-                                                Inactive</a>
-                                        @endif
-                                    </td>
-                                    <td>
 
-                                        <a href="{{url('admin/add-edit-category/'.$category->id)}}" title="Edit Category" data-toggle="tooltip" data-placement="top"><i class="far fa-edit"></i></a>
-                                        <a href="javascript:void(0){{--{{url('admin/delete-category/'.$category->id)}}--}}" class="confirmDelete text-danger" record="category" recordid="{{$category->id}}" title="Delete Category" data-toggle="tooltip" data-placement="top"><i class="far fa-trash-alt"></i></a>
+                                        <a href="{{url('admin/add-edit-category/'.$category->id)}}" title="Edit Category" class="mr-3" data-toggle="tooltip" data-placement="top"><i class="far fa-edit"></i></a>
+                                        <a href="javascript:void(0){{--{{url('admin/delete-category/'.$category->id)}}--}}" class="mr-3 confirmDelete text-danger" record="category" recordid="{{$category->id}}" title="Delete Category" data-toggle="tooltip" data-placement="top"><i class="far fa-trash-alt"></i></a>
+                                        @if($category->status == 1)
+                                            <a class="updateCategoryStatus" id="category-{{$category->id}}" category_id="{{$category->id}}" href="javascript:void(0)">
+                                                <i class="fas fa-toggle-on text-success" aria-hidden="true" status="Active"></i></a>
+                                        @else
+                                            <a class="updateCategoryStatus" id="category-{{$category->id}}" category_id="{{$category->id}}" href="javascript:void(0)">
+                                                <i class="fas fa-toggle-off text-danger" aria-hidden="true" status="Inactive"></i></a>
+                                        @endif
                                     </td>
                                 </tr>
                                 @endforeach

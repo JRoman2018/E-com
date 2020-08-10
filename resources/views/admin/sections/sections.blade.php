@@ -45,11 +45,11 @@
                                     <td>{{$section->name}}</td>
                                     <td>
                                         @if($section->status == 1)
-                                            <a class="updateSectionStatus text-success" id="section-{{$section->id}}" section_id="{{$section->id}}" href="javascript:void(0)">
-                                                Active</a>
+                                            <a class="updateSectionStatus" id="section-{{$section->id}}" section_id="{{$section->id}}" href="javascript:void(0)">
+                                                <i class="fas fa-toggle-on text-success" aria-hidden="true" status="Active"></i></a>
                                         @else
-                                            <a class="updateSectionStatus text-danger" id="section-{{$section->id}}" section_id="{{$section->id}}" href="javascript:void(0)">
-                                                Inactive</a>
+                                            <a class="updateSectionStatus" id="section-{{$section->id}}" section_id="{{$section->id}}" href="javascript:void(0)">
+                                                <i class="fas fa-toggle-off text-danger" aria-hidden="true" status="Inactive"></i></a>
                                         @endif
                                     </td>
                                 </tr>
