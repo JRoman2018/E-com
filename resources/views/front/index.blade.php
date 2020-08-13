@@ -8,48 +8,22 @@
             <div id="featured" class="carousel slide">
                 <div class="carousel-inner">
                     <div class="item active">
-                        <ul class="thumbnails">
-                            <li class="span3">
-                                <div class="thumbnail">
-                                    <i class="tag"></i>
-                                    <a href="product_details.html"><img src="{{url('images/front_images/products/b1.jpg')}}" alt=""></a>
-                                    <div class="caption">
-                                        <h5>Product name</h5>
-                                        <h4><a class="btn" href="product_details.html">VIEW</a> <span class="pull-right">Rs.1000</span></h4>
+                        @foreach($featuredItemsChunk as $featured)
+                            @foreach($featured as $key => $value)
+                            <ul class="thumbnails">
+                                <li class="span3">
+                                    <div class="thumbnail">
+                                        <i class="tag"></i>
+                                        <a href="product_details.html"><img src="{{url('images/front_images/products/b1.jpg')}}" alt=""></a>
+                                        <div class="caption">
+                                            <h5>{{$featured[$key]['product_name']}}</h5>
+                                            <h4><a class="btn" href="product_details.html">VIEW</a> <span class="pull-right">Rs.1000</span></h4>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
-                            <li class="span3">
-                                <div class="thumbnail">
-                                    <i class="tag"></i>
-                                    <a href="product_details.html"><img src="{{url('images/front_images/products/b2.jpg')}}" alt=""></a>
-                                    <div class="caption">
-                                        <h5>Product name</h5>
-                                        <h4><a class="btn" href="product_details.html">VIEW</a> <span class="pull-right">Rs.1000</span></h4>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="span3">
-                                <div class="thumbnail">
-                                    <i class="tag"></i>
-                                    <a href="product_details.html"><img src="{{url('images/front_images/products/b3.jpg')}}" alt=""></a>
-                                    <div class="caption">
-                                        <h5>Product name</h5>
-                                        <h4><a class="btn" href="product_details.html">VIEW</a> <span class="pull-right">Rs.1000</span></h4>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="span3">
-                                <div class="thumbnail">
-                                    <i class="tag"></i>
-                                    <a href="product_details.html"><img src="{{url('images/front_images/products/b4.jpg')}}" alt=""></a>
-                                    <div class="caption">
-                                        <h5>Product name</h5>
-                                        <h4><a class="btn" href="product_details.html">VIEW</a> <span class="pull-right">Rs.1000</span></h4>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
+                                </li>
+                            </ul>
+                            @endforeach
+                        @endforeach
                     </div>
                     <div class="item">
                         <ul class="thumbnails">

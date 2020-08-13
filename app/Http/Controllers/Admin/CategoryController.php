@@ -59,6 +59,7 @@ class CategoryController extends Controller
                 'category_name' => 'required|regex:/^[\pL\s\-]+$/u',
                 'section_id' => 'required',
                 'category_image' => 'image',
+//                'category_discount' => 'required',
                 'url' => 'required'
             ];
             $customMessages = [
@@ -66,6 +67,7 @@ class CategoryController extends Controller
                 'category_name.regex' => 'Valid Category Name is required',
                 'section_id.required' => 'Section is required',
                 'category_image.image' => 'Valid Category Image is required',
+//                'category_discount.required' => 'Category Discount is required',
                 'url.required' => 'Category URL is required',
             ];
             $this->validate($request, $rules, $customMessages);
@@ -91,7 +93,11 @@ class CategoryController extends Controller
             $category->parent_id = $data['parent_id'];
             $category->section_id = $data['section_id'];
             $category->category_name = $data['category_name'];
-            $category->category_discount = $data['category_discount'];
+            if($data['category_discount']):
+                $category->category_discount = $data['category_discount'];
+            else:
+                $category->category_discount = 0;
+            endif;
             $category->description = $data['description'];
             $category->url = $data['url'];
             $category->meta_title = $data['meta_title'];

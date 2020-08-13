@@ -208,6 +208,7 @@
  // });
 
  //Confirmation Deletion with SweetAlert
+ // $(document).on("click",".confirmDelete",function(){}) -> another option
  $(".confirmDelete").click(function () {
      var record = $(this).attr("record");
      var recordid = $(this).attr("recordid");
