@@ -160,6 +160,26 @@
          });
      });
 
+     //Update Banner Status
+     $(".updateBannerStatus").click(function () {
+         var status = $(this).children("i").attr("status");
+         var banner_id = $(this).attr("banner_id");
+         $.ajax({
+             type:'post',
+             url: '/admin/update-banner-status',
+             data: {status:status,banner_id:banner_id},
+             success:function (resp) {
+                 if(resp['status']==0){
+                     $("#banner-"+banner_id).html("<i class='fas fa-toggle-off text-danger' aria-hidden='true' status='Inactive'>");
+                 }else if(resp['status']==1){
+                     $("#banner-"+banner_id).html("<i class='fas fa-toggle-on text-success' aria-hidden='true' status='Active'>");
+                 }
+             },error:function(){
+                 alert("Error");
+             }
+         });
+     });
+
      //Append Category Level
      $('#section_id').change(function () {
         var section_id = $(this).val();

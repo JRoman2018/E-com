@@ -61,11 +61,13 @@
                 {{Session::get('page') ==  'sections' ||
                 Session::get('page') ==  'categories' ||
                 Session::get('page') ==  'brands' ||
+                Session::get('page') ==  'banners' ||
                 Session::get('page') ==  'products' ? 'menu-open' : ""}}">
                     <a href="{{url('admin/sections')}}" class="nav-link
                     {{Session::get('page') ==  'sections' ||
                     Session::get('page') ==  'categories' ||
                     Session::get('page') ==  'brands' ||
+                    Session::get('page') ==  'banners' ||
                     Session::get('page') ==  'products' ? 'active' : ""}}">
                         <i class="nav-icon fas fa-layer-group"></i>
                         <p>
@@ -96,6 +98,12 @@
                             <a href="{{url('admin/products')}}" class="nav-link {{Session::get('page') ==  'products'? 'active' : ""}}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Products</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{url('admin/banners')}}" class="nav-link {{Session::get('page') ==  'banners'? 'active' : ""}}">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Banners</p>
                             </a>
                         </li>
                     </ul>
