@@ -64,7 +64,7 @@
                                     <label for="category_name">Category Name</label>
                                     <input type="text" class="form-control" name="category_name"
                                            id="category_name" placeholder="Enter Category Name"
-                                    value="{{!empty($categorydata['id']) ? $categorydata['category_name'] : (old('category_name'))}}" >
+                                    value="{{!empty($categorydata['id']) ? $categorydata['category_name'] : old('category_name')}}" >
                                 </div>
                                 <div id="appendCategoriesLevel">
                                     @include('admin.categories.append_categories_level')
@@ -77,7 +77,9 @@
                                     <select name="section_id" id="section_id" class="form-control select2" style="width: 100%;">
                                         <option value="">Select</option>
                                         @foreach($getSections as $section)
-                                            <option value="{{$section->id}}" {{!empty($categorydata['section_id']) && $categorydata['section_id']==$section->id ? "selected" : ""}}>{{$section->name}}</option>
+                                            <option value="{{$section['id']}}"
+                                                {{!empty(old('section_id')) && $section['id'] == old('section_id') ? "selected" : ""}}
+                                                {{!empty($categorydata['section_id']) && $section['id'] == $categorydata['section_id'] ? "selected" : ""}}>{{$section['name']}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -108,7 +110,7 @@
                                 <div class="form-group">
                                     <label for="category_discount">Category Discount</label>
                                     <input type="text" class="form-control" id="category_discount"
-                                           name="category_discount" placeholder="Enter Category Name"
+                                           name="category_discount" placeholder="Enter Category Discount"
                                            value="{{!empty($categorydata['id']) ? $categorydata['category_discount'] : (old('category_discount'))}}">
                                 </div>
                                 <div class="form-group">
@@ -122,12 +124,12 @@
                                 <div class="form-group">
                                     <label for="url">Category URL</label>
                                     <input type="text" class="form-control" id="url"
-                                           name="url" placeholder="Enter Category Name"
+                                           name="url" placeholder="Enter Category URL"
                                            value="{{!empty($categorydata['id']) ? $categorydata['url'] : (old('url'))}}">
                                 </div>
                                 <div class="form-group">
                                     <label for="meta_title">Meta Title</label>
-                                    <textarea class="form-control" rows="3" id="meta_title" name="meta_title" placeholder="Enter Meta Description...">{{!empty($categorydata['id']) ? $categorydata['meta_title'] : (old('meta_title'))}}</textarea>
+                                    <textarea class="form-control" rows="3" id="meta_title" name="meta_title" placeholder="Enter Meta Title...">{{!empty($categorydata['id']) ? $categorydata['meta_title'] : (old('meta_title'))}}</textarea>
                                 </div>
                             </div>
 
@@ -140,7 +142,7 @@
                             <div class="col-12 col-sm-6">
                                 <div class="form-group">
                                     <label for="meta_keywords">Meta Keywords</label>
-                                    <textarea class="form-control" rows="3" id="meta_keyword" name="meta_keywords" placeholder="Enter Meta Description...">{{!empty($categorydata['id']) ? $categorydata['meta_keywords'] : (old('meta_keywords'))}}</textarea>
+                                    <textarea class="form-control" rows="3" id="meta_keyword" name="meta_keywords" placeholder="Enter Meta Keywords...">{{!empty($categorydata['id']) ? $categorydata['meta_keywords'] : (old('meta_keywords'))}}</textarea>
                                 </div>
                             </div>
                         </div>

@@ -61,17 +61,25 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="banner_link">Banner Link</label>
-                                    <input type="text" class="form-control" name="link"
-                                           id="link" placeholder="Enter Banner Link"
-                                    value="{{!empty($banner['id']) ? $banner['link'] : (old('link'))}}" >
+                                    <label for="main_image">Banner Image</label>
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="image" name="image" accept="image/*">
+                                            <label class="custom-file-label" for="image">Choose Image</label>
+                                        </div>
+                                        <div class="input-group-append">
+                                            <span class="input-group-text" id="">Upload</span>
+                                        </div>
+                                    </div>
+                                    @if(!empty($banner['image']))
+                                        <div>
+                                            <img style="width: 220px; margin-top: 5px;" src="{{asset('images/banner_images/'.$banner['image'])}}" alt="">
+                                        </div>
+                                    @endif
+                                    <small>Recommended Image Size: (Width: 1170px, Height: 480px)</small>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-sm-6">
                                 <div class="form-group">
                                     <label for="banner_title">Banner Title</label>
                                     <input type="text" class="form-control" name="title"
@@ -79,8 +87,28 @@
                                            value="{{!empty($banner['id']) ? $banner['title'] : (old('title'))}}" >
                                 </div>
                             </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="banner_link">Banner Link</label>
+                                    <input type="text" class="form-control" name="link"
+                                           id="link" placeholder="Enter Banner Link"
+                                           value="{{!empty($banner['id']) ? $banner['link'] : (old('link'))}}" >
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="banner_title">Banner Alternate Text</label>
+                                    <input type="text" class="form-control" name="alt"
+                                           id="alt" placeholder="Enter Banner Alternative"
+                                           value="{{!empty($banner['id']) ? $banner['alt'] : (old('alt'))}}" >
+                                </div>
+                            </div>
                         </div>
                     </div>
+
 
                     <div class="card-footer">
                         <button type="submit" class="btn btn-{{$title=="Add Banner" ? 'primary' : 'success'}}">

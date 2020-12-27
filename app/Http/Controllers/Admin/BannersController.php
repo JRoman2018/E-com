@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Banner;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Session;
+use Session, Image;
 
 class BannersController extends Controller
 {
@@ -32,16 +32,35 @@ class BannersController extends Controller
 //            echo "<pre>"; print_r($data); die;
 
             $rules = [
-                'brand_name' => 'required|regex:/^[\pL\s\-]+$/u',
+                'title' => 'required|regex:/^[\pL\s\-]+$/u',
+                'alt' => 'required',
 
             ];
+
             $customMessages = [
-                'brand_name.required' => 'Brand Name is required',
-                'brand_name.regex' => 'Valid Brand Name is required',
+                'title.required' => 'Banner Title Name is required',
+                'title.regex' => 'Valid Title Name is required',
+                'alt.required' => 'Banner Alternate Text is required'
             ];
+
             $this->validate($request, $rules, $customMessages);
 
-            $banner->name = $data['brand_name'];
+            if($request->hasFile('image')):
+                $image_tmp = $request->file('image');
+                if($image_tmp->isValid()){
+                    $images_name = $image_tmp->getClientOriginalName();
+                    $extension = $image_tmp->getClientOriginalExtension();
+                    $imageName = $images_name.'-'.rand(111,999999).time().'.'.$extension;
+                    $banner_image_path = 'images/banner_images/'.$imageName;
+                    //Upload medium and small image after resize
+                    Image::make($image_tmp)->resize(520,600)->save($banner_image_path);
+                    $banner->image = $imageName;
+                }
+            endif;
+
+            $banner->link = $data['link'];
+            $banner->title = $data['title'];
+            $banner->alt = $data['alt'];
             $banner->status = 1;
             $banner->save();
             return redirect('admin/banners')->with('success_message', $message);
@@ -64,16 +83,16 @@ class BannersController extends Controller
         }
     }
 
-
-
     public function deleteBanner($id){
         $banner = Banner::where('id', $id)->first();
         $banner_image_path = 'images/banner_images/';
 
         //Delete Banner Image if exists in banner folder
-        if(file_exists($banner_image_path.$banner->image)){
-            unlink($banner_image_path.$banner->image);
-        }
+        if(file_exists($banner->image)):
+            if(file_exists($banner_image_path.$banner->image)){
+                unlink($banner_image_path.$banner->image);
+            }
+        endif;
 
         //Delete Banner from banners table
         $banner->delete();

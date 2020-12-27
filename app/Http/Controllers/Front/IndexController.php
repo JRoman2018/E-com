@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Front;
 
+use App\Banner;
 use App\Http\Controllers\Controller;
 use App\Product;
 use App\Section;
@@ -22,8 +23,11 @@ class IndexController extends Controller
         $newProducts = Product::orderBy('id','Desc')->where('status',1)->limit(6)->get()->toArray();
 //        echo "<pre>"; print_r($newProducts); die;
 
+        $banners = Banner::getBanners();
+
         return view('front.index',
             compact('page_name',
+                'banners',
                 'sections',
                 'featuredItemsChunk',
                 'featuredItemsCount',

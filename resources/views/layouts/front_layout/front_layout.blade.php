@@ -8,8 +8,9 @@
     <meta name="author" content="">
 
     <!-- Front style -->
-    <link id="callCss" rel="stylesheet" href="{{url('css/front_css/front.min.css')}}" media="screen"/>
     <link href="{{url('css/front_css/base.css')}}" rel="stylesheet" media="screen"/>
+    <link id="callCss" rel="stylesheet" href="{{url('css/front_css/front.min.css')}}" media="screen"/>
+
     <!-- Front style responsive -->
     <link href="{{url('css/front_css/front-responsive.min.css')}}" rel="stylesheet"/>
     <link href="{{url('css/front_css/font-awesome.css')}}" rel="stylesheet" type="text/css">
@@ -24,46 +25,11 @@
     <style type="text/css" id="enject"></style>
 </head>
 <body>
+{{--Header--}}
 @include('layouts.front_layout.front_header')
-
-@if(isset($page_name) && $page_name=="index")
-    <div id="carouselBlk">
-    <div id="myCarousel" class="carousel slide">
-        <div class="carousel-inner">
-            <div class="item active">
-                <div class="container">
-                    <a href="#"><img style="width:100%" src="{{url('images/front_images/carousel/1.png')}}" alt="special offers"/></a>
-                    <div class="carousel-caption">
-                        <h4>First Thumbnail label</h4>
-                        <p>Banner text</p>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="container">
-                    <a href="register.html"><img style="width:100%" src="{{url('images/front_images/carousel/2.png')}}" alt=""/></a>
-                    <div class="carousel-caption">
-                        <h4>Second Thumbnail label</h4>
-                        <p>Banner text</p>
-                    </div>
-                </div>
-            </div>
-            <div class="item">
-                <div class="container">
-                    <a href="register.html"><img src="{{url('images/front_images/carousel/3.png')}}" alt=""/></a>
-                    <div class="carousel-caption">
-                        <h4>Third Thumbnail label</h4>
-                        <p>Banner text</p>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-        <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
-        <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
-    </div>
-</div>
-@endif
+{{--Banners--}}
+@include('front.banners.home_page_banners')
+{{--Body--}}
 <div id="mainBody">
     <div class="container">
         <div class="row">
@@ -72,6 +38,7 @@
         </div>
     </div>
 </div>
+{{--Footer--}}
 @include('layouts.front_layout.front_footer')
 <!-- Placed at the end of the document so the pages load faster ============================================= -->
 <script src="{{url('js/front_js/jquery.js')}}" type="text/javascript"></script>

@@ -20,6 +20,7 @@ class ProductController extends Controller
         }, 'section' => function($query){
             $query->select('id', 'name');
         }])->get();
+//        return $products;
         Session::put('page', 'products');
 //        $products = json_decode(json_encode($products));
 //        echo "<pre>"; print_r($products); die;
@@ -227,9 +228,11 @@ class ProductController extends Controller
         $product_video_path = 'videos/product_videos/';
 
         //Delete Product Image from category_images folder
-        if(file_exists($product_video_path.$productVideo->product_video)){
+        if(file_exists($productVideo)):
+            if(file_exists($product_video_path.$productVideo->product_video)){
             unlink($product_video_path.$productVideo->product_video);
-        }
+            }
+        endif;
 
         //Delete Product Image from categories table
         Product::where('id',$id)->update(['product_video' => '']);

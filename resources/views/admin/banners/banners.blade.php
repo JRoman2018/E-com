@@ -49,7 +49,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">Banners</h3>
-                            <a href="{{url('admin/add-edit-brand')}}" class="btn btn-success float-right">Add Banner</a>
+                            <a href="{{url('admin/add-edit-banner')}}" class="btn btn-success float-right">Add Banner</a>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">

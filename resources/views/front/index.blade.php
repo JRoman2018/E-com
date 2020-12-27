@@ -5,8 +5,7 @@
     <div class="well well-small">
         <h4>Featured Products <small class="pull-right">{{$featuredItemsCount}}+ featured products</small></h4>
         <div class="row-fluid">
-            <div id="featured" @if($featuredItemsCount > 4) class="carousel slide" @endif>
-
+            <div id="featured" class="carousel slide" >
                 <div class="carousel-inner">
                     @foreach($featuredItemsChunk as $key => $featuredItem)
                         <div class="item @if($key==1) active @endif">
